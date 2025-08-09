@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>{{ page.title }} - {{ site.title }}</title>
+  <meta name="description" content="Archivio ufficiale documenti e moduli dell'ente pubblico. Consulta, scarica e ricerca i documenti in modo semplice e sicuro." />
+  <meta name="author" content="{{ site.author | default: 'Ente Pubblico' }}" />
+  <meta name="robots" content="index, follow" />
+
+  <link rel="icon" href="{{ '/assets/favicon.ico' | relative_url }}" type="image/x-icon" />
+  <link rel="shortcut icon" href="{{ '/assets/favicon.ico' | relative_url }}" type="image/x-icon" />
+
+  <!-- USWDS CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/uswds@2.14.0/dist/css/uswds.min.css" rel="stylesheet" />
+
+  <style>
+    body {
+      font-family: "Source Sans Pro", Arial, sans-serif;
+      background-color: #f9fafb;
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      color: #212121;
+    }
+    main {
+      flex-grow: 1;
+      padding: 2rem 1rem;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+    footer {
+      background-color: #002a5c;
+      color: white;
+      text-align: center;
+      padding: 1.5rem 1rem;
+      font-size: 0.9rem;
+      margin-top: auto;
+      box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.1);
+    }
+    .usa-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      position: relative;
+    }
+    .usa-logo__link img {
+      height: 48px;
+      border-radius: 6px;
+      box-shadow: 0 2px 8px rgb(0 0 0 / 0.15);
+      transition: transform 0.3s ease;
+    }
+    .usa-logo__link:hover img,
+    .usa-logo__link:focus img {
+      transform: scale(1.05);
+      box-shadow: 0 4px 12px rgb(0 0 0 / 0.25);
+    }
+    .usa-logo__title-static {
+      font-weight: 700;
+      font-size: 1.25rem;
+      color: #002a5c;
+      white-space: nowrap;
+      user-select: none;
+    }
+    @media (max-width: 767px) {
+      .usa-logo__title-static { display: none; }
+      .usa-logo__title-button { display: inline-block; }
+    }
+    .usa-table--striped tbody tr:nth-child(odd) {
+      background-color: #f2f4f7;
+    }
+    .hero-image {
+      width: 100%;
+      max-height: 400px;
+      object-fit: cover;
+      display: block;
+      margin-bottom: 2rem;
+      border-radius: 8px;
+      box-shadow: 0 4px 16px rgb(0 0 0 / 0.12);
+    }
+  </style>
+</head>
+<body>
+  <header class="usa-header usa-header--basic" role="banner">
+    <div class="usa-nav-container">
+      <div class="usa-navbar">
+        <div class="usa-logo">
+          <a href="{{ '/' | relative_url }}" class="usa-logo__link" title="Homepage" aria-label="Homepage">
+            <img src="{{ '/assets/logo.png' | relative_url }}" alt="Logo Ente" />
+          </a>
+          <span class="usa-logo__title-static">{{ page.title }}</span>
+        </div>
+        <button class="usa-menu-btn" aria-expanded="false" aria-controls="basic-mobile-menu">Menu</button>
+      </div>
+      <nav id="basic-mobile-menu" class="usa-nav" role="navigation" aria-label="Primary navigation">
+        <ul class="usa-nav__primary usa-accordion">
+          <li class="usa-nav__primary-item">
+            <a href="{{ '/' | relative_url }}" class="usa-nav__link">Home</a>
+          </li>
+          <li class="usa-nav__primary-item">
+            <a href="{{ '/archivio/' | relative_url }}" class="usa-nav__link" aria-current="page">Documenti</a>
+          </li>
+        </ul>
+        <form class="usa-search usa-search--small" role="search" action="{{ '/archivio/' | relative_url }}" method="get">
+          <label class="usa-sr-only" for="search-field">Cerca</label>
+          <input class="usa-input" id="search-field" type="search" name="search" placeholder="Cerca documenti" aria-label="Cerca documenti" />
+          <button class="usa-button usa-button--primary" type="submit" aria-label="Cerca">Cerca</button>
+        </form>
+      </nav>
+    </div>
+  </header>
+
+  <section aria-label="Immagine introduttiva archivio documenti">
+    <div class="grid-container">
+      <br /><br />
+      <img src="https://www.trippando.it/wp-content/uploads/2019/01/pordenone-cosa-vedere-visitare-consigli.jpg" alt="Immagine rappresentativa archivio documenti" class="hero-image" />
+    </div>
+  </section>
+
+  <main id="documenti" class="usa-prose" role="main">
+    <h1 class="usa-heading">{{ page.title }}</h1>
+    <p class="usa-intro">
+      Benvenuto nell'archivio ufficiale dei documenti e moduli dell'ente pubblico. Puoi navigare tra le sezioni o effettuare una ricerca per trovare rapidamente ciò che ti serve.
+    </p>
+
+    <table class="usa-table usa-table--borderless usa-table--striped usa-table--stacked">
+      <thead>
+        <tr>
+          <th scope="col">Titolo</th>
+          <th scope="col">Descrizione</th>
+          <th scope="col">Autore</th>
+          <th scope="col" class="text-center">Download</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% assign results = site.docs %}
+        {% if page.search and page.search != "" %}
+          {% assign results = site.docs | where_exp: "item", "item.title contains page.search or item.description contains page.search" %}
+        {% endif %}
+
+        {% for doc in results %}
+          <tr>
+            <td>{{ doc.title }}</td>
+            <td>{{ doc.description }}</td>
+            <td>{{ doc.author }}</td>
+            <td class="text-center">
+              <a href="{{ doc.file | relative_url }}" target="_blank" class="usa-button usa-button--small usa-button--secondary" aria-label="Scarica {{ doc.title }} PDF">
+                PDF
+              </a>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </main>
+
+  <footer>
+    <div class="grid-container">
+      &copy; {{ site.time | date: "%Y" }} {{ site.title }} • Tutti i diritti riservati • <a href="#" style="color:#cbd3dc;">Privacy</a> • <a href="#" style="color:#cbd3dc;">Accessibilità</a>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/uswds@2.14.0/dist/js/uswds.min.js"></script>
+</body>
+</html>
