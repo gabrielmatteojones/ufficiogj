@@ -1,478 +1,167 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ufficio Digitale di Gabriel</title>
-    <link rel="stylesheet" href="https://gabrieljones.it/udfvg/assets/css/main.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <style>
-body {
-  margin: 0;
-  font-family: 'Roboto', Arial, sans-serif;
-  line-height: 1.6;
-  color: #333;
-}
+  <title>{{ page.title }} - {{ site.title }}</title>
+  <meta name="description" content="Archivio ufficiale documenti e moduli di Gabriel Matteo Jones. Consulta, scarica e ricerca i documenti in modo semplice e sicuro." />
+  <meta name="author" content="{{ site.author | default: 'Gabriel Matteo Jones Web Services' }}" />
+  <meta name="robots" content="index, follow" />
 
-header {
-  background-color: #1c1c1c;
-  color: white;
-  padding: 15px 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-}
+  <link rel="icon" href="{{ '/assets/favicon.ico' | relative_url }}" type="image/x-icon" />
+  <link rel="shortcut icon" href="{{ '/assets/favicon.ico' | relative_url }}" type="image/x-icon" />
 
-header .logo {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
+  <!-- USWDS CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/uswds@2.14.0/dist/css/uswds.min.css" rel="stylesheet" />
 
-header .logo img {
-  height: 60px;
-}
-
-header h1 {
-  font-size: 1.5rem;
-  margin: 0;
-}
-
-header .social-icons {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 10px;
-}
-
-header .social-icons a {
-  color: white;
-  font-size: 1rem;
-  text-decoration: none;
-  transition: color 0.3s;
-}
-
-header .social-icons a:hover {
-  color: #f0a500;
-}
-
-.hero {
-  position: relative;
-  background: url('https://www.sediadaufficio.it/blog/wp-content/uploads/2018/01/Ufficio-Industriale-1.jpg') no-repeat center center/cover;
-  height: 400px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  text-shadow: 0 2px 5px rgba(0, 0, 0, 0.7);
-}
-
-.hero .title {
-  background: rgba(0, 0, 0, 0.751);
-  padding: 20px 30px;
-  border-radius: 10px;
-  text-align: center;
-}
-
-.hero h2 {
-  margin: 0;
-  font-size: 2.5rem;
-}
-
-nav {
-  background-color: #b30000;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 10px;
-  padding: 10px 0;
-}
-
-nav a {
-  color: white;
-  text-decoration: none;
-  padding: 10px 30px;
-  background: #cc0000;
-  border-radius: 5px;
-  font-weight: bold;
-  transition: background 0.3s, transform 0.3s;
-}
-
-nav a:hover {
-  background: #e60000;
-  transform: scale(1.1);
-}
-
-.container2 {
-  display: flex;
-  max-width: 1200px;
-  margin: 50px auto;
-  background: #fff;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
-  overflow: hidden;
-  border: 5px solid #a40000;
-}
-
-.image {
-  flex: 1;
-  background-image: url('https://2.gravatar.com/avatar/53241b11fb23d653d6c97ab192be4c459ef4201d71bffe0b87f8c09c061c577b?size=900&d=initials');
-  background-size: cover;
-  background-position: center;
-  min-height: 400px;
-}
-
-.content {
-  flex: 2;
-  padding: 30px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.content h1 {
-  font-size: 2.5rem;
-  color: #a40000;
-  margin-bottom: 20px;
-  text-transform: uppercase;
-}
-
-.content p {
-  font-size: 1.2rem;
-  color: #333;
-  line-height: 1.8;
-}
-
-table {
-  width: 100%;
-  margin-top: 15px;
-  border-collapse: separate;
-  border-spacing: 10px;
-}
-
-table a {
-  color: white;
-  text-decoration: none;
-}
-
-table a:hover {
-  color: #f0a500;
-}
-
-td, th {
-  width: 33.33%;
-  height: 50px;
-  text-align: center;
-  background-color: #a40000;
-  color: #fff;
-  border: 3px solid #fff;
-  font-size: 1.2rem;
-  font-weight: bold;
-  text-transform: uppercase;
-  border-radius: 10px;
-}
-
-/* --- RESPONSIVE --- */
-@media (max-width: 992px) {
-  .hero h2 {
-    font-size: 2rem;
-  }
-
-  .content h1 {
-    font-size: 2rem;
-  }
-
-  .content p {
-    font-size: 1rem;
-  }
-
-  td, th {
-    font-size: 1rem;
-  }
-
-  nav a {
-    padding: 8px 20px;
-  }
-}
-
-@media (max-width: 768px) {
-  .container2 {
-    flex-direction: column;
-  }
-
-  .hero {
-    height: 300px;
-    text-align: center;
-  }
-
-  .social-icons {
-    justify-content: center;
-  }
-
-  header {
-    justify-content: center;
-  }
-
-  nav {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  table tr {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  td, th {
-    width: 100%;
-  }
-}
-
-    </style>
-<style>
-        body {
-            margin: 0;
-            font-family: 'Roboto', Arial, sans-serif;
-            line-height: 1.6;
-            color: #333;
-        }
-
-        header {
-            background-color: #1c1c1c;
-            color: white;
-            padding: 15px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        header .logo {
-            display: flex;
-            align-items: center;
-        }
-
-        header .logo img {
-            height: 60px;
-            margin-right: 15px;
-        }
-
-        header h1 {
-            font-size: 1.5rem;
-            margin: 0;
-        }
-
-        header .social-icons a {
-            margin: 0 10px;
-            color: white;
-            font-size: 1rem;
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-
-        header .social-icons a:hover {
-            color: #f0a500;
-        }
-
-        .hero {
-            position: relative;
-            background: url('https://www.sediadaufficio.it/blog/wp-content/uploads/2018/01/Ufficio-Industriale-1.jpg') no-repeat center center/cover;
-            height: 400px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.7);
-        }
-
-        .hero .title {
-            background: rgba(0, 0, 0, 0.751);
-            padding: 20px 30px;
-            border-radius: 10px;
-            text-align: center;
-        }
-
-        .hero h2 {
-            margin: 0;
-            font-size: 2.5rem;
-        }
-
-        nav {
-            background-color: #b30000;
-            display: flex;
-            justify-content: center;
-            padding: 10px 0;
-        }
-
-        nav a {
-            color: white;
-            text-decoration: none;
-            margin: 0 15px;
-            padding: 10px 40px;
-            background: #cc0000;
-            border-radius: 5px;
-            font-weight: bold;
-            transition: background 0.3s, transform 0.3s;
-        }
-
-        nav a:hover {
-            background: #e60000;
-            transform: scale(1.1);
-        }
-
-        .container2 {
-            display: flex;
-            max-width: 1200px;
-            margin: 50px auto;
-            background: #fff;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
-            overflow: hidden;
-            border: 5px solid #a40000;
-        }
-
-        .image {
-            flex: 1;
-            background-image: url('https://2.gravatar.com/avatar/53241b11fb23d653d6c97ab192be4c459ef4201d71bffe0b87f8c09c061c577b?size=900&d=initials');
-            background-size: cover;
-            background-position: center;
-            min-height: 400px;
-        }
-
-        .content {
-            flex: 2;
-            padding: 30px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        .content h1 {
-            font-size: 2.5rem;
-            color: #a40000;
-            margin-bottom: 20px;
-            text-transform: uppercase;
-        }
-
-        .content p {
-            font-size: 1.2rem;
-            color: #333;
-            line-height: 1.8;
-        }
-
-        table a {
-            color: white; /* Imposta il colore dei link a bianco */
-            text-decoration: none; /* Rimuove la sottolineatura */
-        }
-
-        table a:hover {
-            color: #f0a500; /* Cambia colore al passaggio del mouse (opzionale) */
-        }
-
-
-        td, th {
-            width: 33.33%;
-            height: 50px;
-            text-align: center;
-            background-color: #a40000;
-            color: #fff;
-            border: 3px solid #fff;
-            font-size: 1.2rem;
-            font-weight: bold;
-            text-transform: uppercase;
-            border-radius: 10px;
-        }
-
-        @media (max-width: 768px) {
-            .container2 {
-                flex-direction: column;
-            }
-
-            .image, .content {
-                flex: 1;
-            }
-        }
-    </style>
+  <style>
+    body {
+      font-family: "Source Sans Pro", Arial, sans-serif;
+      background-color: #f9fafb;
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      color: #212121;
+    }
+    main {
+      flex-grow: 1;
+      padding: 2rem 1rem;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+    footer {
+      background-color: #002a5c;
+      color: white;
+      text-align: center;
+      padding: 1.5rem 1rem;
+      font-size: 0.9rem;
+      margin-top: auto;
+      box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.1);
+    }
+    .usa-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      position: relative;
+    }
+    .usa-logo__link img {
+      height: 48px;
+      border-radius: 6px;
+      box-shadow: 0 2px 8px rgb(0 0 0 / 0.15);
+      transition: transform 0.3s ease;
+    }
+    .usa-logo__link:hover img,
+    .usa-logo__link:focus img {
+      transform: scale(1.05);
+      box-shadow: 0 4px 12px rgb(0 0 0 / 0.25);
+    }
+    .usa-logo__title-static {
+      font-weight: 700;
+      font-size: 1.25rem;
+      color: #002a5c;
+      white-space: nowrap;
+      user-select: none;
+    }
+    @media (max-width: 767px) {
+      .usa-logo__title-static { display: none; }
+      .usa-logo__title-button { display: inline-block; }
+    }
+    .usa-table--striped tbody tr:nth-child(odd) {
+      background-color: #f2f4f7;
+    }
+    .hero-image {
+      width: 100%;
+      max-height: 400px;
+      object-fit: cover;
+      display: block;
+      margin-bottom: 2rem;
+      border-radius: 8px;
+      box-shadow: 0 4px 16px rgb(0 0 0 / 0.12);
+    }
+  </style>
 </head>
 <body>
-
-
-    <header>
-        <div class="logo">
-         <a href="/">
-            <img src="https://gabrieljones.it/assets/logo.png" alt="Stemma del GMJ">
-         </a>
-        <a href="/">
-           <h3>Ufficio di Gabriel</h3>
-        </a>
+  <header class="usa-header usa-header--basic" role="banner">
+    <div class="usa-nav-container">
+      <div class="usa-navbar">
+        <div class="usa-logo">
+          <a href="{{ '/' | relative_url }}" class="usa-logo__link" title="Homepage" aria-label="Homepage">
+            <img src="{{ '/assets/logo.png' | relative_url }}" alt="Logo Ente" />
+          </a>
+          <span class="usa-logo__title-static">{{ page.title }}</span>
         </div>
-
-        <div class="social-icons">
-            <a href="https://agfo.fvg.it">Arena Giovani</a>
-            <a href="https://blog.gabrieljones.it/">Blog</a>
-            <a href="https://ufficiogabrieljones.it/dashboard/">Amministrazione 2</a>
-        </div>
-    </header>
-
-    <section class="hero">
-        <div class="title">
-            <h2>Ufficio Digitale di Gabriel</h2>
-            <h4>Benvenuti, in tutto il mio mondo!</h4>
-        </div>
-    </section>
-
-    <nav>
-        <a href="/documenti/">Documenti Pubblici</a>
-        <a href="/servizi/">Servizi</a>
-        <a href="/blog/">Blog</a>
-        <a href="/contatti/">Contatti</a>
-        <a href="/login/">Login</a>
-    </nav>  
-
-    <div class="container2">
-        <div class="image"></div>
-        <div class="content">
-            <h1>Scopri chi sono</h1>
-            <p>Ciao! Sono Gabriel Matteo Jones, sono un Web Developer, ex bibliotecario volontario, animatore, politico, videomaker e questo non è ancora nulla, scoprimi qui, nel mio ufficio digitale!</p>
-
-            <table>
-                <tr>
-                    <td><a href="/chisono/" target="_blank">Chi sono</a></td>
-                    <td><a href="/agfo/" target="_blank">Arena Giovani</a></td>
-                    <td><a href="/trasparenza/" target="_blank">Trasparenza</a></td>
-                </tr>
-            </table>
-
-            <table>
-                <tr>
-                    <td><a href="/grest/" target="_blank">Grest</a></td>
-                    <td><a href="mailto:gjones@agfo.fvg.it" target="_blank">Contatti</a></td>
-                    <td><a href="/documenti/" target="_blank">documenti publici</a></td>
-                </tr>
-            </table>
-            <table>
-                <tr>
-                    <td><a href="/dashboard/" target="_blank">Entra nell'Ufficio</a></td>
-                    <td><a href="/blog/" target="_blank">Blog+</a></td>
-                    <td><a href="/avvisi/" target="_blank">Avvisi</a></td>
-                </tr>
-            </table>
-        </div>
+        <button class="usa-menu-btn" aria-expanded="false" aria-controls="basic-mobile-menu">Menu</button>
+      </div>
+      <nav id="basic-mobile-menu" class="usa-nav" role="navigation" aria-label="Primary navigation">
+        <ul class="usa-nav__primary usa-accordion">
+          <li class="usa-nav__primary-item">
+            <a href="{{ '/' | relative_url }}" class="usa-nav__link">Home</a>
+          </li>
+          <li class="usa-nav__primary-item">
+            <a href="{{ '/archivio/' | relative_url }}" class="usa-nav__link" aria-current="page">Documenti</a>
+          </li>
+        </ul>
+        <form class="usa-search usa-search--small" role="search" action="{{ '/archivio/' | relative_url }}" method="get">
+          <label class="usa-sr-only" for="search-field">Cerca</label>
+          <input class="usa-input" id="search-field" type="search" name="search" placeholder="Cerca documenti" aria-label="Cerca documenti" />
+          <button class="usa-button usa-button--primary" type="submit" aria-label="Cerca">Cerca</button>
+        </form>
+      </nav>
     </div>
-  <div class="container">
-    <main>
-    {{ content }}
-    </main>
-  <p>Powered by DataWin</p>
-</div><script type="text/javascript">
-var _iub = _iub || [];
-_iub.csConfiguration = {"siteId":4163114,"cookiePolicyId":61374569,"lang":"it","storage":{"useSiteId":true}};
-</script>
-<script type="text/javascript" src="https://cs.iubenda.com/autoblocking/4163114.js"></script>
-<script type="text/javascript" src="//cdn.iubenda.com/cs/iubenda_cs.js" charset="UTF-8" async></script>
-<script src="
-https://cdn.jsdelivr.net/npm/bootstrap-italia@2.16.0/dist/js/bootstrap-italia.min.js
-"></script>
+  </header>
+
+  <section aria-label="Immagine introduttiva archivio documenti">
+    <div class="grid-container">
+      <br /><br />
+      <img src="https://www.trippando.it/wp-content/uploads/2019/01/pordenone-cosa-vedere-visitare-consigli.jpg" alt="Immagine rappresentativa archivio documenti" class="hero-image" />
+    </div>
+  </section>
+
+  <main id="documenti" class="usa-prose" role="main">
+    <h1 class="usa-heading">Benvenuti sull'Archivio Documentario di Accento Civico</h1>
+    <p class="usa-intro">
+      Benvenuto nell'archivio ufficiale dei documenti e moduli di Accento Civico. Puoi navigare tra le sezioni o effettuare una ricerca per trovare rapidamente ciò che ti serve.
+    </p>
+
+    <table class="usa-table usa-table--borderless usa-table--striped usa-table--stacked">
+      <thead>
+        <tr>
+          <th scope="col">Titolo</th>
+          <th scope="col">Descrizione</th>
+          <th scope="col">Autore</th>
+          <th scope="col" class="text-center">Download</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% assign results = site.docs %}
+        {% if page.search and page.search != "" %}
+          {% assign results = site.docs | where_exp: "item", "item.title contains page.search or item.description contains page.search" %}
+        {% endif %}
+
+        {% for doc in results %}
+          <tr>
+            <td>{{ doc.title }}</td>
+            <td>{{ doc.description }}</td>
+            <td>{{ doc.author }}</td>
+            <td class="text-center">
+              <a href="{{ doc.file | relative_url }}" target="_blank" class="usa-button usa-button--small usa-button--secondary" aria-label="Scarica {{ doc.title }} PDF">
+                PDF
+              </a>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </main>
+
+  <footer>
+    <div class="grid-container">
+      &copy; {{ site.time | date: "%Y" }} {{ site.title }} • Tutti i diritti riservati • <a href="#" style="color:#cbd3dc;">Privacy</a> • <a href="#" style="color:#cbd3dc;">Accessibilità</a>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/uswds@2.14.0/dist/js/uswds.min.js"></script>
+</body>
 </html>
